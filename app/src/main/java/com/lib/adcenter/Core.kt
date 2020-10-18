@@ -23,6 +23,7 @@ class Core {
         val jsonRequest = JsonObjectRequest(Request.Method.POST, ConfigValues.baseUrl, json,
             {
                 Log.d("AdCenterDebug",it.toString())
+                userRegistered(context)
             }, {
 
             })

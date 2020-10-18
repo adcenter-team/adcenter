@@ -10,6 +10,7 @@ import android.os.Build
 import android.provider.Settings.Secure
 import android.util.DisplayMetrics
 import android.view.WindowManager
+import java.io.IOException
 
 
 class JsonValues {
@@ -56,9 +57,14 @@ class JsonValues {
         }
 
         fun getMarketerId(context: Context): String {
-            return context.assets.open("marketerId.txt").bufferedReader().use {
-                it.readText()
+            return try {
+                context.assets.open("marketerId.txt").bufferedReader().use {
+                    it.readText()
+                }
+            }catch (e: IOException){
+                ""
             }
+
         }
     }
 }

@@ -13,7 +13,7 @@ class AdCenter {
         fun initWithApkNormal(context: Context){
             Core().installWithApkNormal(context)
         }
-        fun initWithApkNormalBluetooth(context: Context){
+        fun initWithApkBluetooth(context: Context){
             Core().installWithApkBluetooth(context)
         }
     }
