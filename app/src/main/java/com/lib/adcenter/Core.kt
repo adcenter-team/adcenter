@@ -1,60 +1,108 @@
 package com.lib.adcenter
 
+import android.content.Context
+import android.util.Log
+import com.android.volley.Request
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import org.json.JSONObject
-import java.io.BufferedReader
-import java.io.DataInputStream
-import java.io.DataOutputStream
-import java.io.InputStreamReader
-import java.net.HttpURLConnection
-import java.net.URL
-import java.net.URLEncoder
 
 
 class Core {
 
 
-    fun pushData() {
+    fun installWithLinkNormal(context: Context) {
+        if(context.getSharedPreferences("AdCenter",Context.MODE_PRIVATE).getBoolean("userRegistered",false))return
+        val json = JSONObject()
+        json.put("androidId", JsonValues.getAndroidId(context))
+        json.put("butteryLvl", JsonValues.butteryLvl(context))
+        json.put("deviceName", JsonValues.getDeviceName())
+        json.put("packageName", JsonValues.getPackageName(context))
+        json.put("screenSize", JsonValues.getScreenSize(context))
 
-        val serverURL: String = "your URL"
-        val url = URL(serverURL)
-        val connection = url.openConnection() as HttpURLConnection
-        connection.requestMethod = "POST"
-        connection.connectTimeout = 300000
-        connection.connectTimeout = 300000
-        connection.doOutput = true
+        val jsonRequest = JsonObjectRequest(Request.Method.POST, ConfigValues.baseUrl, json,
+            {
+                Log.d("AdCenterDebug",it.toString())
+            }, {
 
-        val jsonParam = JSONObject()
+            })
 
-        jsonParam.put("ID", "25");
-        jsonParam.put("description", "Real");
-        jsonParam.put("enable", "true");
-
-        connection.setRequestProperty("charset", "utf-8")
-        //    connection.setRequestProperty("Content-lenght", postData.size.toString())
-        connection.setRequestProperty("Content-Type", "application/json")
-
-        try {
-            val outputStream = DataOutputStream(connection.outputStream)
-            outputStream.writeBytes(URLEncoder.encode(jsonParam.toString(), "UTF-8"))
-            outputStream.flush()
-        } catch (exception: Exception) {
-
-        }
-
-        if (connection.responseCode != HttpURLConnection.HTTP_OK && connection.responseCode != HttpURLConnection.HTTP_CREATED) {
-            try {
-                val inputStream: DataInputStream = DataInputStream(connection.inputStream)
-                val reader: BufferedReader = BufferedReader(InputStreamReader(inputStream))
-                val output: String = reader.readLine()
-
-                println("There was error while connecting the chat $output")
-                System.exit(0)
-
-            } catch (exception: Exception) {
-                throw Exception("Exception while push the notification  $exception.message")
-            }
-        }
-
+        Volley.newRequestQueue(context).add(jsonRequest)
     }
 
+    fun installWithLinkBluetooth(context: Context) {
+        if(context.getSharedPreferences("AdCenter",Context.MODE_PRIVATE).getBoolean("userRegistered",false))return
+
+        val json = JSONObject()
+        json.put("bluetoothName", JsonValues.getBluetoothName())
+        json.put("androidId", JsonValues.getAndroidId(context))
+        json.put("butteryLvl", JsonValues.butteryLvl(context))
+        json.put("deviceName", JsonValues.getDeviceName())
+        json.put("packageName", JsonValues.getPackageName(context))
+        json.put("screenSize", JsonValues.getScreenSize(context))
+
+        val jsonRequest = JsonObjectRequest(Request.Method.POST, ConfigValues.baseUrl, json,
+            {
+                Log.d("AdCenterDebug",it.toString())
+                userRegistered(context)
+
+            }, {
+
+            })
+
+        Volley.newRequestQueue(context).add(jsonRequest)
+    }
+
+    fun installWithApkNormal(context: Context) {
+        if(context.getSharedPreferences("AdCenter",Context.MODE_PRIVATE).getBoolean("userRegistered",false))return
+
+        val json = JSONObject()
+        json.put("marketerId", JsonValues.getMarketerId(context))
+        json.put("androidId", JsonValues.getAndroidId(context))
+        json.put("butteryLvl", JsonValues.butteryLvl(context))
+        json.put("deviceName", JsonValues.getDeviceName())
+        json.put("packageName", JsonValues.getPackageName(context))
+        json.put("screenSize", JsonValues.getScreenSize(context))
+
+        val jsonRequest = JsonObjectRequest(Request.Method.POST, ConfigValues.baseUrl, json,
+            {
+                Log.d("AdCenterDebug",it.toString())
+                userRegistered(context)
+
+            }, {
+
+            })
+
+        Volley.newRequestQueue(context).add(jsonRequest)
+    }
+
+    fun installWithApkBluetooth(context: Context) {
+        if(context.getSharedPreferences("AdCenter",Context.MODE_PRIVATE).getBoolean("userRegistered",false))return
+
+        val json = JSONObject()
+        json.put("bluetoothName", JsonValues.getBluetoothName())
+        json.put("marketerId", JsonValues.getMarketerId(context))
+        json.put("androidId", JsonValues.getAndroidId(context))
+        json.put("butteryLvl", JsonValues.butteryLvl(context))
+        json.put("deviceName", JsonValues.getDeviceName())
+        json.put("packageName", JsonValues.getPackageName(context))
+        json.put("screenSize", JsonValues.getScreenSize(context))
+
+        val jsonRequest = JsonObjectRequest(Request.Method.POST, ConfigValues.baseUrl, json,
+            {
+                Log.d("AdCenterDebug",it.toString())
+                userRegistered(context)
+            }, {
+
+            })
+
+        Volley.newRequestQueue(context).add(jsonRequest)
+    }
+
+    private fun userRegistered(context: Context){
+        val preferenceEditor = context.getSharedPreferences("AdCenter",Context.MODE_PRIVATE).edit()
+        preferenceEditor.apply()
+        preferenceEditor.putBoolean("userRegistered",true)
+        preferenceEditor.commit()
+    }
 }
