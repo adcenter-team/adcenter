@@ -2,6 +2,6 @@ package com.lib.adcenter
 
 class ConfigValues {
     companion object{
-        const val baseUrl = "http://rasoolmansoory.ir/"
+        const val baseUrl = "https://rasoolmansoory.ir/test.php"
     }
 }

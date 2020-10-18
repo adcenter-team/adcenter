@@ -3,8 +3,6 @@ package com.lib.adcenter
 import android.content.Context
 
 class AdCenter {
-    private val core = Core()
-
     companion object{
         fun initWithLinkNormal(context: Context){
             Core().installWithLinkNormal(context)
