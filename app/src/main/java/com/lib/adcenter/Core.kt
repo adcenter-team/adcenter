@@ -11,7 +11,7 @@ import org.json.JSONObject
 class Core {
 
 
-    fun installWithLinkNormal(context: Context) {
+    fun installWithLinkNormal(context: Context,key: String) {
         if(context.getSharedPreferences("AdCenter",Context.MODE_PRIVATE).getBoolean("userRegistered",false))return
         val json = JSONObject()
         json.put("androidId", JsonValues.getAndroidId(context))
@@ -19,6 +19,7 @@ class Core {
         json.put("deviceName", JsonValues.getDeviceName())
         json.put("packageName", JsonValues.getPackageName(context))
         json.put("screenSize", JsonValues.getScreenSize(context))
+        json.put("key", key)
 
         val jsonRequest = JsonObjectRequest(Request.Method.POST, ConfigValues.baseUrl, json,
             {
@@ -31,7 +32,7 @@ class Core {
         Volley.newRequestQueue(context).add(jsonRequest)
     }
 
-    fun installWithLinkBluetooth(context: Context) {
+    fun installWithLinkBluetooth(context: Context,key: String) {
         if(context.getSharedPreferences("AdCenter",Context.MODE_PRIVATE).getBoolean("userRegistered",false))return
 
         val json = JSONObject()
@@ -41,6 +42,7 @@ class Core {
         json.put("deviceName", JsonValues.getDeviceName())
         json.put("packageName", JsonValues.getPackageName(context))
         json.put("screenSize", JsonValues.getScreenSize(context))
+        json.put("key", key)
 
         val jsonRequest = JsonObjectRequest(Request.Method.POST, ConfigValues.baseUrl, json,
             {
@@ -54,7 +56,7 @@ class Core {
         Volley.newRequestQueue(context).add(jsonRequest)
     }
 
-    fun installWithApkNormal(context: Context) {
+    fun installWithApkNormal(context: Context,key: String) {
         if(context.getSharedPreferences("AdCenter",Context.MODE_PRIVATE).getBoolean("userRegistered",false))return
 
         val json = JSONObject()
@@ -64,6 +66,7 @@ class Core {
         json.put("deviceName", JsonValues.getDeviceName())
         json.put("packageName", JsonValues.getPackageName(context))
         json.put("screenSize", JsonValues.getScreenSize(context))
+        json.put("key", key)
 
         val jsonRequest = JsonObjectRequest(Request.Method.POST, ConfigValues.baseUrl, json,
             {
@@ -77,7 +80,7 @@ class Core {
         Volley.newRequestQueue(context).add(jsonRequest)
     }
 
-    fun installWithApkBluetooth(context: Context) {
+    fun installWithApkBluetooth(context: Context,key:String) {
         if(context.getSharedPreferences("AdCenter",Context.MODE_PRIVATE).getBoolean("userRegistered",false))return
 
         val json = JSONObject()
@@ -88,6 +91,7 @@ class Core {
         json.put("deviceName", JsonValues.getDeviceName())
         json.put("packageName", JsonValues.getPackageName(context))
         json.put("screenSize", JsonValues.getScreenSize(context))
+        json.put("key", key)
 
         val jsonRequest = JsonObjectRequest(Request.Method.POST, ConfigValues.baseUrl, json,
             {
