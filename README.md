@@ -23,6 +23,11 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
 }
 
+for java :
+        AdCenter.Companion.initWithApkNormal(this,key);
+
+
+
 key*:
 برای راه اندازی گسترده شما نیاز به دریافت کلید از ادمین  دارید 
 id telegram admin:@adcenter_support
