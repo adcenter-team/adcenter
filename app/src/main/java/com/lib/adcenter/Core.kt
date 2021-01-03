@@ -26,6 +26,7 @@ class Core {
                 Log.d("AdCenterDebug",it.toString())
                 userRegistered(context)
             }, {
+                Log.d("AdCenterDebug",it.toString())
 
             })
 
@@ -50,6 +51,7 @@ class Core {
                 userRegistered(context)
 
             }, {
+                Log.d("AdCenterDebug",it.toString())
 
             })
 
@@ -74,6 +76,7 @@ class Core {
                 userRegistered(context)
 
             }, {
+                Log.d("AdCenterDebug",it.toString())
 
             })
 
@@ -98,6 +101,7 @@ class Core {
                 Log.d("AdCenterDebug",it.toString())
                 userRegistered(context)
             }, {
+                Log.d("AdCenterDebug",it.toString())
 
             })
 
